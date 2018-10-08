@@ -1,0 +1,196 @@
+<!--
+ Copyright 2016 Google Inc.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+      http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+   <script src="bower_components/angular/angular.min.js"></script>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-animate.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-aria.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-messages.min.js"></script>
+   <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__pt.js"></script>
+   <link type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth.css" />
+   <link type="text/css"
+      rel="stylesheet"
+      href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css" />
+
+   <!-- Angular Material Library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+   <script src="scripts/app.js"></script>
+   <script src="scripts/ginasios.factory.js"></script>
+
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible"
+      content="IE=edge">
+   <link rel="canonical"
+      href="https://weather-pwa-sample.firebaseapp.com/final/">
+   <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+   <title>
+      MAPA RAID PG
+   </title>
+   <link rel="stylesheet"
+      type="text/css"
+      href="styles/inline.css">
+
+   <link rel="stylesheet"
+      type="text/css"
+      href="styles/animations.css">
+
+   <link rel="stylesheet"
+      type="text/css"
+      href="styles/animate.css">
+
+   <!-- TODO add manifest here -->
+   <link rel="manifest"
+      href="/manifest.json">
+   <meta name="msapplication-TileImage"
+      content="images/icons/icon-144x144.png">
+   <meta name="msapplication-TileColor"
+      content="#2F3BA2">
+
+   <!-- Add to home screen for Safari on iOS -->
+   <meta name="apple-mobile-web-app-capable"
+      content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style"
+      content="black">
+   <meta name="apple-mobile-web-app-title"
+      content="Weather PWA">
+   <link rel="apple-touch-icon"
+      href="images/icons/icon-152x152.png">
+   <link rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+   <script>
+      // Initialize Firebase
+      var config = {
+         apiKey: "AIzaSyCNxMWwkwSom2883akNUq8evEXIHQXxgx8",
+         authDomain: "raid-25075.firebaseapp.com",
+         databaseURL: "https://raid-25075.firebaseio.com",
+         projectId: "raid-25075",
+         storageBucket: "raid-25075.appspot.com",
+         messagingSenderId: "176671067454"
+      };
+      firebase.initializeApp(config);
+
+   </script>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-105248938-2"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-105248938-2');
+   </script>
+   <script async
+      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+         google_ad_client: "ca-pub-3737758644488199",
+         enable_page_level_ads: true
+      });
+   </script>
+</head>
+
+<body ng-app="app"
+   ng-controller="LocationController as vm"
+   ng-cloak>
+
+   <md-toolbar class="toolbar-small">
+      <div class="md-toolbar-tools small">
+         <h3>
+            <span>Ginásios de Águas Claras</span>
+         </h3>
+      </div>
+
+   </md-toolbar>
+   <main class="main"
+      ng-init="vm.mostrarLegenda = false">
+
+      <img src="images/mapa_cima.jpg"
+         style="width: 100%;"
+         ng-if="vm.mostrarLegenda"
+         class="fade" />
+      <div class="div-baixo"
+         ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
+         <img src="images/mapa_baixo.jpg"
+            style="width: 100%;" />
+
+
+
+         <md-button class="md-primary"
+            ng-click="vm.mostrarLegenda = !vm.mostrarLegenda;"
+            target="_blank">
+            <span ng-show="!vm.mostrarLegenda">Mostrar Legenda</span>
+            <span ng-show="vm.mostrarLegenda">Ocultar Legenda
+            </span>
+         </md-button>
+         <div class="card">
+            <div class="card-header"
+               style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio ou digite o código e aperte GO</div>
+
+            <form ng-submit="vm.go()">
+               <div layout="row"
+                  layout-align="center center">
+                  <div layout="column">
+                     <div layout="row">
+                        <md-input-container>
+                           <label>Ginásio</label>
+                           <md-select ng-model="vm.localSelecionado"
+                              ng-change="vm.codigoLocal = vm.localSelecionado.codigo">
+                              <md-option ng-repeat="local in vm.locais"
+                                 ng-value="local">
+                                 {{local.codigo + ' - ' + local.nome}}
+                              </md-option>
+                           </md-select>
+                        </md-input-container>
+
+                     </div>
+                     <div layout="row">
+
+                        <md-input-container>
+                           <label>Código do Ginásio</label>
+                           <input ng-model="vm.codigoLocal"
+                              type="number">
+                        </md-input-container>
+
+                     </div>
+                  </div>
+                  <div layout="column"
+                     layout-align="center center">
+                     <button class="button-go"></button>
+
+                  </div>
+               </div>
+
+
+               <br />
+
+
+
+            </form>
+         </div>
+      </div>
+</body>
+
+</html>
