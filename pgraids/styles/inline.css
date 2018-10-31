@@ -18,6 +18,15 @@
   box-sizing: border-box;
 }
 
+.available {
+  display: inline !important;
+}
+
+.button2 {
+  display: none;
+  background-color: #ba2f2f !important;
+  color: white !important;
+}
 html,
 body {
   padding: 0;

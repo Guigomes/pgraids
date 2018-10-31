@@ -38,7 +38,9 @@
 
   <!-- Firebase -->
   <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
+  <!--
   <script src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__pt.js"></script>
+  -->
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
   <script src="scripts/firebaseInit.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth.css" />
@@ -56,7 +58,6 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105248938-2"></script>
   <script src="scripts/analytics.js"></script>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
   <!-- Aplicação-->
   <script src="scripts/app.js"></script>
@@ -69,6 +70,8 @@
 
 
   <!--
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({
       google_ad_client: "ca-pub-3737758644488199",
@@ -83,7 +86,7 @@
 
 </head>
 
-<body ng-app="app" ng-controller="LocationController as vm" ng-cloak>
+<body ng-app="app" ng-controller="LocationController as vm" ng-cloak style="overflow:scroll">
 
   <md-toolbar class="toolbar-small">
     <div class="md-toolbar-tools small">
@@ -94,6 +97,7 @@
 
   </md-toolbar>
   <main class="main" ng-init="vm.mostrarLegenda = false">
+
 
     <img src="images/mapa_cima.jpg" style="width: 100%;" ng-if="vm.mostrarLegenda" class="fade" />
     <div class="div-baixo" ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
@@ -106,10 +110,14 @@
         <span ng-show="vm.mostrarLegenda">Ocultar Legenda
         </span>
       </md-button>
-      <div class="card">
-        <button id="installer" class="button" value="botão">Botão</button>
-        <div id="firebaseui-auth-container"></div>
+      <div class="card" layout-align="center center" layout="column">
+        <md-button id="installer" class="md-raised  button2" target="_blank">
+          Adicionar a sua tela inicial
 
+        </md-button>
+        <!--
+        <div id="firebaseui-auth-container"></div>
+-->
         <div class="card-header" style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio ou digite o
           código e aperte GO</div>
 
