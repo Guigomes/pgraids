@@ -18,179 +18,138 @@
 <html>
 
 <head>
-   <script src="bower_components/angular/angular.min.js"></script>   
-   <script src ="bower_components/angular-animate/angular-animate.min.js"></script>
-   <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-   <script src="bower_components/angular-messages/angular-messages.min.js"></script>
-   
-   <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__pt.js"></script>
-   <link type="text/css"
-      rel="stylesheet"
-      href="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth.css" />
-   <link type="text/css"
-      rel="stylesheet"
-      href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css" />
 
-   <!-- Angular Material Library -->
-   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
-   <script src="scripts/app.js"></script>
-   <script src="scripts/ginasios.factory.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible"
-      content="IE=edge">
-   <link rel="canonical"
-      href="https://weather-pwa-sample.firebaseapp.com/final/">
-   <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-   <title>
-      MAPA RAID PG
-   </title>
-   <link rel="stylesheet"
-      type="text/css"
-      href="styles/inline.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TODO add manifest here -->
+  <link rel="manifest" href="/manifest.json">
 
-   <link rel="stylesheet"
-      type="text/css"
-      href="styles/animations.css">
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
 
-   <link rel="stylesheet"
-      type="text/css"
-      href="styles/animate.css">
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
 
-   <!-- TODO add manifest here -->
-   <link rel="manifest"
-      href="/manifest.json">
-   <meta name="msapplication-TileImage"
-      content="images/icons/icon-144x144.png">
-   <meta name="msapplication-TileColor"
-      content="#2F3BA2">
 
-   <!-- Add to home screen for Safari on iOS -->
-   <meta name="apple-mobile-web-app-capable"
-      content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style"
-      content="black">
-   <meta name="apple-mobile-web-app-title"
-      content="Weather PWA">
-   <link rel="apple-touch-icon"
-      href="images/icons/icon-152x152.png">
-   <link rel="stylesheet"
-      href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
-   <script>
-      // Initialize Firebase
-      var config = {
-         apiKey: "AIzaSyCNxMWwkwSom2883akNUq8evEXIHQXxgx8",
-         authDomain: "raid-25075.firebaseapp.com",
-         databaseURL: "https://raid-25075.firebaseio.com",
-         projectId: "raid-25075",
-         storageBucket: "raid-25075.appspot.com",
-         messagingSenderId: "176671067454"
-      };
-      firebase.initializeApp(config);
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__pt.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <script src="scripts/firebaseInit.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth.css" />
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css" />
 
-   </script>
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-105248938-2"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
+  <!-- Angular Material Library -->
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 
-      gtag('config', 'UA-105248938-2');
-   </script>
-   <script async
-      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-   <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-         google_ad_client: "ca-pub-3737758644488199",
-         enable_page_level_ads: true
-      });
-   </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105248938-2"></script>
+  <script src="scripts/analytics.js"></script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <!-- Aplicação-->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/ginasios.factory.js"></script>
+  <script src="scripts/pwa.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="styles/inline.css">
+  <link rel="stylesheet" type="text/css" href="styles/animations.css">
+  <link rel="stylesheet" type="text/css" href="styles/animate.css">
+
+
+  <!--
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-3737758644488199",
+      enable_page_level_ads: true
+    });
+  </script>
+-->
+  <title>
+    MAPA RAID PG
+  </title>
+
+
 </head>
 
-<body ng-app="app"
-   ng-controller="LocationController as vm"
-   ng-cloak>
+<body ng-app="app" ng-controller="LocationController as vm" ng-cloak>
 
-   <md-toolbar class="toolbar-small">
-      <div class="md-toolbar-tools small">
-         <h3>
-            <span>Ginásios de Águas Claras</span>
-         </h3>
+  <md-toolbar class="toolbar-small">
+    <div class="md-toolbar-tools small">
+      <h3>
+        <span>Ginásios de Águas Claras</span>
+      </h3>
+    </div>
+
+  </md-toolbar>
+  <main class="main" ng-init="vm.mostrarLegenda = false">
+
+    <img src="images/mapa_cima.jpg" style="width: 100%;" ng-if="vm.mostrarLegenda" class="fade" />
+    <div class="div-baixo" ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
+      <img src="images/mapa_baixo.jpg" style="width: 100%;" />
+
+
+
+      <md-button class="md-primary" ng-click="vm.mostrarLegenda = !vm.mostrarLegenda;" target="_blank">
+        <span ng-show="!vm.mostrarLegenda">Mostrar Legenda</span>
+        <span ng-show="vm.mostrarLegenda">Ocultar Legenda
+        </span>
+      </md-button>
+      <div class="card">
+        <button id="installer" class="button" value="botão">Botão</button>
+        <div id="firebaseui-auth-container"></div>
+
+        <div class="card-header" style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio ou digite o
+          código e aperte GO</div>
+
+        <form ng-submit="vm.go()">
+          <div layout="row" layout-align="center center">
+            <div layout="column">
+              <div layout="row">
+                <md-input-container>
+                  <label>Ginásio</label>
+                  <md-select ng-model="vm.localSelecionado" ng-change="vm.codigoLocal = vm.localSelecionado.codigo">
+                    <md-option ng-repeat="local in vm.locais" ng-value="local">
+                      {{local.codigo + ' - ' + local.nome}}
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+
+              </div>
+              <div layout="row">
+
+                <md-input-container>
+                  <label>Código do Ginásio</label>
+                  <input ng-model="vm.codigoLocal" type="number">
+                </md-input-container>
+
+              </div>
+            </div>
+            <div layout="column" layout-align="center center">
+              <button class="button-go"></button>
+
+            </div>
+          </div>
+
+
+          <br />
+
+
+
+        </form>
       </div>
-
-   </md-toolbar>
-   <main class="main"
-      ng-init="vm.mostrarLegenda = false">
-
-      <img src="images/mapa_cima.jpg"
-         style="width: 100%;"
-         ng-if="vm.mostrarLegenda"
-         class="fade" />
-      <div class="div-baixo"
-         ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
-         <img src="images/mapa_baixo.jpg"
-            style="width: 100%;" />
-
-
-
-         <md-button class="md-primary"
-            ng-click="vm.mostrarLegenda = !vm.mostrarLegenda;"
-            target="_blank">
-            <span ng-show="!vm.mostrarLegenda">Mostrar Legenda</span>
-            <span ng-show="vm.mostrarLegenda">Ocultar Legenda
-            </span>
-         </md-button>
-         <div class="card">
-            <div class="card-header"
-               style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio ou digite o código e aperte GO</div>
-
-            <form ng-submit="vm.go()">
-               <div layout="row"
-                  layout-align="center center">
-                  <div layout="column">
-                     <div layout="row">
-                        <md-input-container>
-                           <label>Ginásio</label>
-                           <md-select ng-model="vm.localSelecionado"
-                              ng-change="vm.codigoLocal = vm.localSelecionado.codigo">
-                              <md-option ng-repeat="local in vm.locais"
-                                 ng-value="local">
-                                 {{local.codigo + ' - ' + local.nome}}
-                              </md-option>
-                           </md-select>
-                        </md-input-container>
-
-                     </div>
-                     <div layout="row">
-
-                        <md-input-container>
-                           <label>Código do Ginásio</label>
-                           <input ng-model="vm.codigoLocal"
-                              type="number">
-                        </md-input-container>
-
-                     </div>
-                  </div>
-                  <div layout="column"
-                     layout-align="center center">
-                     <button class="button-go"></button>
-
-                  </div>
-               </div>
-
-
-               <br />
-
-
-
-            </form>
-         </div>
-      </div>
+    </div>
 </body>
 
 </html>

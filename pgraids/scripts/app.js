@@ -15,6 +15,7 @@
 (function () {
    "use strict";
 
+
    angular.module("app", ['ngMaterial', 'ngAnimate']);
 
    angular.module("app").config(function ($mdThemingProvider) {
