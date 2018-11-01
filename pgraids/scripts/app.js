@@ -15,14 +15,38 @@
 (function() {
   "use strict";
 
-  angular.module("app", ["ngMaterial", "ngAnimate"]);
+  angular.module("app", ["ngMaterial", "ngAnimate", "ui.router"]);
 
-  angular.module("app").config(function($mdThemingProvider) {
-    $mdThemingProvider
-      .theme("default")
-      .primaryPalette("red")
-      .accentPalette("blue");
-  });
+  angular
+    .module("app")
+    .config(function($mdThemingProvider, $stateProvider, $urlRouterProvider) {
+      $mdThemingProvider
+        .theme("default")
+        .primaryPalette("red")
+        .accentPalette("blue");
+
+      $stateProvider
+        .state("/", {
+          url: "/",
+          name: "/",
+          views: {
+            viewContent: {
+              templateUrl: "./pages/index-deslogado.html"
+            }
+          }
+        })
+        .state("logado", {
+          url: "/logado",
+          name: "logado",
+          views: {
+            viewContent: {
+              templateUrl: "/pages/index-logado.html"
+            }
+          }
+        });
+
+      $urlRouterProvider.otherwise("/");
+    });
 
   angular.module("app").controller("LocationController", LocationController);
 

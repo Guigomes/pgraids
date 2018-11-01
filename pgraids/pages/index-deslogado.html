@@ -1,0 +1,61 @@
+<main class="main" ng-init="vm.mostrarLegenda = false">
+
+    <!--
+    <img src="images/mapa_cima.jpg" style="width: 100%;" ng-if="vm.mostrarLegenda" class="fade" />
+    <div class="div-baixo" ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
+      <img src="images/mapa_baixo.jpg" style="width: 100%;" />
+
+    -->
+
+    <md-button class="md-primary" ng-click="vm.mostrarLegenda = !vm.mostrarLegenda;" target="_blank">
+        <span ng-show="!vm.mostrarLegenda">Mostrar Legenda</span>
+        <span ng-show="vm.mostrarLegenda">Ocultar Legenda
+        </span>
+    </md-button>
+    <div class="card" layout-align="center center" layout="column">
+        <md-button id="installer" class="md-raised  button2" target="_blank">
+            Adicionar a sua tela inicial
+
+        </md-button>
+
+
+        <div class="card-header" style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio ou digite o
+            código e aperte GO</div>
+
+        <form ng-submit="vm.go()">
+            <div layout="row" layout-align="center center">
+                <div layout="column">
+                    <div layout="row">
+                        <md-input-container>
+                            <label>Ginásio</label>
+                            <md-select ng-model="vm.localSelecionado" ng-change="vm.codigoLocal = vm.localSelecionado.codigo">
+                                <md-option ng-repeat="local in vm.locais" ng-value="local">
+                                    {{local.codigo + ' - ' + local.nome}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                    </div>
+                    <div layout="row">
+
+                        <md-input-container>
+                            <label>Código do Ginásio</label>
+                            <input ng-model="vm.codigoLocal" type="number">
+                        </md-input-container>
+
+                    </div>
+                </div>
+                <div layout="column" layout-align="center center">
+                    <button class="button-go"></button>
+
+                </div>
+            </div>
+
+
+            <br />
+
+
+
+        </form>
+    </div>
+    </div>
