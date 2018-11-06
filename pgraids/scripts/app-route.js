@@ -32,3 +32,19 @@ angular
 
     $urlRouterProvider.otherwise("/");
   });
+
+angular.module("app").run(run);
+
+function run($window, Authentication) {
+  const beforeinstallprompt = function(e) {
+    promptEvent = e;
+    promptEvent.preventDefault();
+    console.log("before3");
+    Authentication.setPromptEvent(promptEvent);
+    ga("send", "event", "install", "available");
+    // root.classList.add("available");
+    return false;
+  };
+
+  $window.addEventListener("beforeinstallprompt", beforeinstallprompt);
+}

@@ -6,6 +6,13 @@
   function Authentication($state, Usuario) {
     var vm = this;
 
+    function setPromptEvent(promptEvent) {
+      vm.promptEvent = promptEvent;
+    }
+
+    function getPromptEvent() {
+      return vm.promptEvent;
+    }
     function inicializar() {
       // FirebaseUI config.
       firebase.auth().onAuthStateChanged(
@@ -61,7 +68,9 @@
     }
     return {
       inicializar: inicializar,
-      logout: logout
+      logout: logout,
+      setPromptEvent: setPromptEvent,
+      getPromptEvent: getPromptEvent
     };
   }
 })();

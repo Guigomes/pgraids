@@ -1,3 +1,4 @@
+/*
 window.addEventListener("load", function() {
   const installEl = document.getElementById("installer");
   const installer = new Installer(installEl);
@@ -36,6 +37,7 @@ const Installer = function(root) {
   const beforeinstallprompt = function(e) {
     promptEvent = e;
     promptEvent.preventDefault();
+    console.log("before");
     ga("send", "event", "install", "available");
     root.classList.add("available");
     return false;
@@ -47,3 +49,4 @@ const Installer = function(root) {
   root.addEventListener("click", install.bind(this));
   root.addEventListener("touchend", install.bind(this));
 };
+*/
