@@ -5,7 +5,10 @@ function PrincipalController(
   Usuario,
   Authentication,
   $mdToast,
-  $state
+  $state,
+  $rootScope,
+  User,
+  Ginasios
 ) {
   var vm = this;
 
@@ -14,6 +17,21 @@ function PrincipalController(
   vm.sair = sair;
 
   vm.usuario = Usuario.getUsuario();
+
+  vm.mostrarInstalar = false;
+
+  User.buscarUsuario().then(user => {
+    console.log("UserFinal", user);
+  });
+
+  $rootScope.$on("available", function() {
+    vm.mostrarInstalar = true;
+    $rootScope.$apply();
+  });
+
+  vm.instalar = function() {
+    Authentication.instalar();
+  };
 
   init();
 

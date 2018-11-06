@@ -18,14 +18,15 @@
 
         <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
 
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Bem vindo {{vm.usuario.displayName}}</h1>
+            <md-toolbar class="md-theme-indigo primary">
+                <h1 class="md-toolbar-tools">Bem vindo</h1>
+                <h2 class="md-toolbar-tools"> {{vm.usuario.displayName}}</h2>
             </md-toolbar>
             <md-content layout-padding>
 
                 <md-list class="md-dense" flex>
                     <md-list-item ng-click="navigateTo('data usage', $event)">
-                        <md-icon md-svg-icon="cached"></md-icon>
+                        <md-icon md-font-set="material-icons">person</md-icon>
                         <p>Minha conta</p>
                     </md-list-item>
                     <md-divider></md-divider>
@@ -44,66 +45,67 @@
         </md-sidenav>
 
         <md-content flex layout-padding>
-            <!--
-    <img src="images/mapa_cima.jpg" style="width: 100%;" ng-if="vm.mostrarLegenda" class="fade" />
-    <div class="div-baixo" ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
-      <img src="images/mapa_baixo.jpg" style="width: 100%;" />
 
-    -->
-            <md-button class="md-primary" ng-click="vm.mostrarLegenda = !vm.mostrarLegenda;" target="_blank">
-                <span ng-show="!vm.mostrarLegenda">Mostrar Legenda</span>
-                <span ng-show="vm.mostrarLegenda">Ocultar Legenda
-                </span>
-            </md-button>
+            <img src="images/mapa_cima.jpg" style="width: 100%;" ng-if="vm.mostrarLegenda" class="fade" />
+            <div class="div-baixo" ng-class="{'div-mais-baixo': vm.mostrarLegenda}">
+                <img src="images/mapa_baixo.jpg" style="width: 100%;" />
 
 
-            <div class="card" layout-align="center center" layout="column">
-                <md-button id="installer" class="md-raised  button2" target="_blank">
-                    Adicionar a sua tela inicial
-
+                <md-button class="md-primary" ng-click="vm.mostrarLegenda = !vm.mostrarLegenda;" target="_blank">
+                    <span ng-show="!vm.mostrarLegenda">Mostrar Legenda</span>
+                    <span ng-show="vm.mostrarLegenda">Ocultar Legenda
+                    </span>
                 </md-button>
 
 
-                <div class="card-header" style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio ou
-                    digite o
-                    código e aperte GO</div>
+                <div class="card" layout-align="center center" layout="column">
+                    <md-button ng-click="vm.instalar();" class="md-raised  button2" target="_blank">
+                        Adicionar a sua tela inicial
 
-                <form ng-submit="vm.go()">
-                    <div layout="row" layout-align="center center">
-                        <div layout="column">
-                            <div layout="row">
-                                <md-input-container>
-                                    <label>Ginásio</label>
-                                    <md-select ng-model="vm.localSelecionado" ng-change="vm.codigoLocal = vm.localSelecionado.codigo">
-                                        <md-option ng-repeat="local in vm.locais" ng-value="local">
-                                            {{local.codigo + ' - ' + local.nome}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+                    </md-button>
 
+
+                    <div class="card-header" style="font-weight: bold; background-color:#ba2f2f; ">Selecione o ginásio
+                        ou
+                        digite o
+                        código e aperte GO</div>
+
+                    <form ng-submit="vm.go()">
+                        <div layout="row" layout-align="center center">
+                            <div layout="column">
+                                <div layout="row">
+                                    <md-input-container>
+                                        <label>Ginásio</label>
+                                        <md-select ng-model="vm.localSelecionado" ng-change="vm.codigoLocal = vm.localSelecionado.codigo">
+                                            <md-option ng-repeat="local in vm.locais" ng-value="local">
+                                                {{local.codigo + ' - ' + local.nome}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+
+                                </div>
+                                <div layout="row">
+
+                                    <md-input-container>
+                                        <label>Código do Ginásio</label>
+                                        <input ng-model="vm.codigoLocal" type="number">
+                                    </md-input-container>
+
+                                </div>
                             </div>
-                            <div layout="row">
-
-                                <md-input-container>
-                                    <label>Código do Ginásio</label>
-                                    <input ng-model="vm.codigoLocal" type="number">
-                                </md-input-container>
+                            <div layout="column" layout-align="center center">
+                                <button class="button-go"></button>
 
                             </div>
                         </div>
-                        <div layout="column" layout-align="center center">
-                            <button class="button-go"></button>
-
-                        </div>
-                    </div>
 
 
-                    <br />
+                        <br />
 
 
 
-                </form>
-            </div>
+                    </form>
+                </div>
 
 
 

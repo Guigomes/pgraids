@@ -21,9 +21,10 @@
 .available {
   display: inline !important;
 }
-
+.primary {
+  background-color: #ba2f2f !important;
+}
 .button2 {
-  display: none;
   background-color: #ba2f2f !important;
   color: white !important;
 }

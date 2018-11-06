@@ -35,16 +35,26 @@ angular
 
 angular.module("app").run(run);
 
-function run($window, Authentication) {
+function run($window, $rootScope, Authentication) {
   const beforeinstallprompt = function(e) {
     promptEvent = e;
     promptEvent.preventDefault();
-    console.log("before3");
+    $rootScope.$broadcast("available");
+
+    console.log("before4");
     Authentication.setPromptEvent(promptEvent);
     ga("send", "event", "install", "available");
-    // root.classList.add("available");
+
     return false;
   };
 
+  const installed = function(e) {
+    Authentication.setPromptEvent(null);
+
+    // This fires after onbeforinstallprompt OR after manual add to homescreen.
+    ga("send", "event", "install", "installed");
+  };
+
   $window.addEventListener("beforeinstallprompt", beforeinstallprompt);
+  $window.addEventListener("appinstalled", installed);
 }

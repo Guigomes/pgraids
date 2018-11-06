@@ -7,6 +7,7 @@ var config = {
   messagingSenderId: "976467573499"
 };
 firebase.initializeApp(config);
+var database = firebase.database();
 
 if (navigator.serviceWorker.controller) {
   console.log("[PWA Builder] active service worker found, no need to register");

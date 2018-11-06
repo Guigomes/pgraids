@@ -13,12 +13,40 @@
     function getPromptEvent() {
       return vm.promptEvent;
     }
+
+    function isMostrarInstalar() {
+      return vm.isMostrarInstalar;
+    }
+    function setMostrarInstalar(isMostrarInstalar) {
+      vm.isMostrarInstalar = isMostrarInstalar;
+    }
+    function instalar() {
+      let promptEvent = vm.promptEvent;
+      if (promptEvent) {
+        promptEvent.prompt();
+        promptEvent.userChoice
+          .then(function(choiceResult) {
+            // The user actioned the prompt (good or bad).
+            // good is handled in
+            promptEvent = null;
+            ga("send", "event", "install", choiceResult);
+            return true;
+          })
+          .catch(function(installError) {
+            // Boo. update the UI.
+            promptEvent = null;
+            ga("send", "event", "install", "errored");
+            return false;
+          });
+      }
+    }
     function inicializar() {
       // FirebaseUI config.
       firebase.auth().onAuthStateChanged(
         function(user) {
           if (user) {
             // User is signed in.
+
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -28,10 +56,8 @@
             var providerData = user.providerData;
 
             user.getIdToken().then(function(accessToken) {
-              console.log("USER", user);
-              console.log("accessToken", accessToken);
-
               Usuario.setUsuario(user);
+
               $state.go("logado");
             });
           } else {
@@ -50,8 +76,12 @@
                 window.location.assign("<your-privacy-policy-url>");
               }
             };
-            // Initialize the FirebaseUI Widget using Firebase.
-            vm.ui = new firebaseui.auth.AuthUI(firebase.auth());
+            vm.ui = firebaseui.auth.AuthUI.getInstance();
+            if (!vm.ui) {
+              // Initialize the FirebaseUI Widget using Firebase.
+
+              vm.ui = new firebaseui.auth.AuthUI(firebase.auth());
+            }
             // The start method will wait until the DOM is loaded.
             vm.ui.start("#firebaseui-auth-container", uiConfig);
             console.log("Deslogado");
@@ -65,12 +95,16 @@
 
     function logout() {
       vm.ui.delete();
+      console.log("DELETE");
     }
     return {
       inicializar: inicializar,
       logout: logout,
       setPromptEvent: setPromptEvent,
-      getPromptEvent: getPromptEvent
+      getPromptEvent: getPromptEvent,
+      instalar: instalar,
+      isMostrarInstalar: isMostrarInstalar,
+      setMostrarInstalar: setMostrarInstalar
     };
   }
 })();
