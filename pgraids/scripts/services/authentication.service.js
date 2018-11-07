@@ -84,6 +84,7 @@
             }
             // The start method will wait until the DOM is loaded.
             vm.ui.start("#firebaseui-auth-container", uiConfig);
+
             console.log("Deslogado");
           }
         },

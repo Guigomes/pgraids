@@ -11,7 +11,8 @@
 
     function adicionarUsuario(nome, level, time) {
       let userId = firebase.auth().currentUser.uid;
-      firebase
+      console.log(userId + " - " + nome + " - " + level + " - " + time);
+      return firebase
         .database()
         .ref("users/" + userId)
         .set({

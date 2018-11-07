@@ -8,7 +8,10 @@ function PrincipalController(
   $state,
   $rootScope,
   User,
-  Ginasios
+  Ginasios,
+  $mdDialog,
+  $scope,
+  Toast
 ) {
   var vm = this;
 
@@ -19,9 +22,14 @@ function PrincipalController(
   vm.usuario = Usuario.getUsuario();
 
   vm.mostrarInstalar = false;
+  init();
 
   User.buscarUsuario().then(user => {
-    console.log("UserFinal", user);
+    if (user == null) {
+      __abrirModalCadastro();
+    }
+
+    vm.usuario = user;
   });
 
   $rootScope.$on("available", function() {
@@ -32,8 +40,6 @@ function PrincipalController(
   vm.instalar = function() {
     Authentication.instalar();
   };
-
-  init();
 
   function init() {
     try {
@@ -84,12 +90,44 @@ function PrincipalController(
       .signOut()
       .then(
         function() {
-          Authentication.logout();
           $state.go("/");
           console.log("logout");
         },
         function(error) {
           console.log("logout error");
+        }
+      );
+  }
+
+  function __abrirModalCadastro() {
+    $mdDialog
+      .show({
+        controller: DialogController,
+        controllerAs: "vm",
+        templateUrl: "pages/dialog1.tmpl.html",
+        parent: angular.element(document.body),
+        //  clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(
+        function(novoUsuario) {
+          console.log("novousuario", novoUsuario);
+          User.adicionarUsuario(
+            novoUsuario.apelido,
+            novoUsuario.nivel,
+            novoUsuario.time
+          ).then(
+            () => {
+              Toast.mostrarMensagem("Cadastro realizado com sucesso");
+            },
+            erro => {
+              Toast.mostrarErro(erro);
+            }
+          );
+          console.log("novoUsuario", novoUsuario);
+        },
+        function() {
+          $scope.status = "You cancelled the dialog.";
         }
       );
   }
