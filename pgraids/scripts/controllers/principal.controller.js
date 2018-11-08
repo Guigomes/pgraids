@@ -15,33 +15,35 @@ function PrincipalController(
 ) {
   var vm = this;
 
+  Authentication.isUsuarioLogado(function(user) {
+    console.log("User", user);
+  });
   vm.toggle = toggle;
   vm.go = go;
   vm.sair = sair;
 
-  vm.usuario = Usuario.getUsuario();
-
-  vm.mostrarInstalar = false;
-  init();
-
-  User.buscarUsuario().then(user => {
-    if (user == null) {
-      __abrirModalCadastro();
-    }
-
-    vm.usuario = user;
-  });
-
-  $rootScope.$on("available", function() {
-    vm.mostrarInstalar = true;
-    $rootScope.$apply();
-  });
+  //init();
 
   vm.instalar = function() {
     Authentication.instalar();
   };
 
   function init() {
+    $rootScope.$on("available", function() {
+      vm.mostrarInstalar = true;
+      $rootScope.$apply();
+    });
+    vm.usuario = Usuario.getUsuario();
+
+    vm.mostrarInstalar = false;
+    User.buscarUsuario().then(user => {
+      if (user == null) {
+        __abrirModalCadastro();
+      }
+
+      vm.usuario = user;
+    });
+
     try {
       vm.locais = Ginasios.getGinasios();
       vm.localSelecionado = vm.locais[0];

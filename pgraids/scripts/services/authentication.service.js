@@ -40,7 +40,12 @@
           });
       }
     }
-    function inicializar() {
+
+    function isUsuarioLogado(callback) {
+      console.log("CHAMOU");
+      return firebase.auth().onAuthStateChanged(callback);
+    }
+    function inicializar(telaLogado) {
       // FirebaseUI config.
       firebase.auth().onAuthStateChanged(
         function(user) {
@@ -57,8 +62,9 @@
 
             user.getIdToken().then(function(accessToken) {
               Usuario.setUsuario(user);
-
-              $state.go("logado");
+              if (telaLogado === undefined) {
+                $state.go("logado");
+              }
             });
           } else {
             var uiConfig = {
@@ -105,7 +111,8 @@
       getPromptEvent: getPromptEvent,
       instalar: instalar,
       isMostrarInstalar: isMostrarInstalar,
-      setMostrarInstalar: setMostrarInstalar
+      setMostrarInstalar: setMostrarInstalar,
+      isUsuarioLogado: isUsuarioLogado
     };
   }
 })();
